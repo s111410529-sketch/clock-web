@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時日期與時間</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .date {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .time {
+            font-size: 6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .weekday {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .date {
+                font-size: 1.5rem;
+            }
+            .time {
+                font-size: 3.5rem;
+            }
+            .weekday {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date" id="date"></div>
+        <div class="time" id="time"></div>
+        <div class="weekday" id="weekday"></div>
+    </div>
+
+    <script>
+        const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+        function updateDateTime() {
+            const now = new Date();
+
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const weekday = weekdays[now.getDay()];
+
+            document.getElementById('date').textContent = `${year}年${month}月${day}日`;
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('weekday').textContent = weekday;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
